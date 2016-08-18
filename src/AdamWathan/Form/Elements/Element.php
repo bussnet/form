@@ -2,11 +2,13 @@
 
 namespace AdamWathan\Form\Elements;
 
+use Illuminate\Contracts\Support\Htmlable;
+
 /**
  * Class Element
  * @package AdamWathan\Form\Elements
  */
-abstract class Element
+abstract class Element implements Htmlable
 {
     protected $attributes = [];
 
@@ -189,5 +191,14 @@ abstract class Element
         call_user_func_array([$this, 'attribute'], $params);
 
         return $this;
+    }
+
+    /**
+     * Get content as a string of HTML.
+     *
+     * @return string
+     */
+    public function toHtml() {
+        return $this->render();
     }
 }
